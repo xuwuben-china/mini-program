@@ -1,0 +1,68 @@
+.pricker-mask {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #000;
+  opacity: 0;
+  overflow: hidden;
+  z-index: 99;
+  color: #fff;
+
+}
+
+.picker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  bottom: -320px;
+  left: 0;
+  transition: height 0.5s;
+  z-index: 100;
+  background: white;
+  border-top: 1px solid #EFEFF4;
+
+}
+
+.picker-btn-box {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.picker-btn {
+  padding: 7px 15px;
+  color: #ccc;
+}
+
+.picker-btn.confirm {
+  color: #19f;
+}
+
+.picker-block {}
+
+.picker-view {
+  width: 690rpx;
+  height: 120px;
+
+}
+
+.picker-column {
+  flex-shrink: 0;
+}
+
+.picker-item {
+  line-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 34rpx;
+}
+

@@ -1,0 +1,39 @@
+<!-- 
+mft 格式 优先级更高  YYYY-MM-dd hh:mm:ss
+mode  time(hh:mm:ss) date(YYYY-MM-dd) date-time(YYYY-MM-dd hh:mm:ss)
+fields 粒度 (day,month  second,minute)
+ -->
+
+
+<view catchtouchmove="preventDefault" hidden="{{!showPicker}}">
+	<view class="picker-container" animation="{{animationSlideIn}}" bind:transitionend="slideInEnd">
+		<view class="picker-btn-box">
+			<view class="picker-btn" bindtap="cancle">{{cancleText}}</view>
+			<view class='picker-btn confirm' bindtap="confirm">{{confirmText}}</view>
+		</view>
+		<view class="picker-block">
+			<picker-view bindpickend="pickerEnd" bindpickstart="pickerStart" bindchange="pickerChange" class="picker-view" style="height: {{pickerViewHeight}}px" value="{{timeIndexArr}}">
+				<picker-view-column bindtouchstart="columnTouchstart"  class="picker-column" hidden="{{!timeFlag.year}}" data-index="0">
+					<view class='picker-item' wx:for="{{yearList}}" wx:key='*this'>{{item}}年</view>
+				</picker-view-column>
+				<picker-view-column bindtouchstart="columnTouchstart" class="picker-column" hidden="{{!timeFlag.month}}" data-index="1">
+					<view class='picker-item' wx:for="{{monthList}}" wx:key='*this'>{{item}}月</view>
+				</picker-view-column>
+				<picker-view-column bindtouchstart="columnTouchstart" class="picker-column" hidden="{{!timeFlag.day}}" data-index="2">
+					<view class='picker-item' wx:for="{{dayList}}" wx:key='*this'>{{item}}日</view>
+				</picker-view-column>
+				<picker-view-column bindtouchstart="columnTouchstart" class="picker-column" hidden="{{!timeFlag.hour}}" data-index="3">
+					<view class='picker-item' wx:for="{{hourList}}" wx:key='*this'>{{item}}时</view>
+				</picker-view-column>
+				<picker-view-column bindtouchstart="columnTouchstart" class="picker-column" hidden="{{!timeFlag.minute}}" data-index="4">
+					<view class='picker-item' wx:for="{{minuteList}}" wx:key='*this'>{{item}}分</view>
+				</picker-view-column>
+				<picker-view-column bindtouchstart="columnTouchstart" class="picker-column" hidden="{{!timeFlag.second}}" data-index="5">
+					<view class='picker-item' wx:for="{{secondList}}" wx:key='*this'>{{item}}秒</view>
+				</picker-view-column>
+			</picker-view>
+		</view>
+	</view>
+	<!-- 遮罩 -->
+	<view class="pricker-mask" bindtap="hideModal" animation="{{animationFade}}"></view>
+</view>
