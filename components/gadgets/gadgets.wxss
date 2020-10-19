@@ -1,0 +1,106 @@
+.tool-warp {
+  position: fixed;
+  z-index: 99;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.tool-warp.prohibit {
+  pointer-events: auto;
+}
+
+.tool-btn-warp {
+  pointer-events: auto;
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.tools-list {
+  position: absolute;
+  top: -7%;
+  display: flex;
+  text-align: center;
+  right: 150rpx;
+  color: #fff;
+  font-size: 20rpx;
+  padding: 15rpx 35rpx;
+  visibility: hidden;
+  justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.65);
+  /* transform: translateY(-50%); */
+  transform-origin: 100% 50%;
+  border-radius: 10rpx;
+  animation: 0.3s forwards;
+}
+
+.tools-list.show {
+  animation-name: zoomInRight;
+}
+
+.tools-list.hide {
+  animation-name: zoomOutRight;
+}
+
+.tools-list.left.show {
+  animation-name: zoomInLeft;
+}
+
+.tools-list.left.hide {
+  animation-name: zoomOutLeft;
+}
+
+.tools-list::after {
+  position: absolute;
+  content: "";
+  right: -28rpx;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: translateY(-50%);
+  border-left: 15rpx solid rgba(0, 0, 0, 0.65);
+  border-right: 15rpx solid transparent;
+  border-top: 15rpx solid transparent;
+  border-bottom: 15rpx solid transparent;
+}
+
+.tools-item {
+  position: relative;
+  width: 80rpx;
+  padding: 0 35rpx 33rpx;
+  white-space: nowrap
+}
+
+.tools-item view {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tools-item image {
+  width: 64rpx;
+  height: 64rpx;
+  margin-bottom: 10rpx;
+}
+
+.tool-btn,
+.tool-btn image {
+  width: 100%;
+  height: 100%;
+}
+
+.tools-list.left {
+  left: 150rpx;
+  right: unset;
+}
+
+.tools-list.left::after {
+  left: -28rpx;
+  border-left: 15rpx solid transparent;
+  border-right: 15rpx solid rgba(0, 0, 0, 0.65);
+  border-top: 15rpx solid transparent;
+  border-bottom: 15rpx solid transparent;
+}

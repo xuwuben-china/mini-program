@@ -1,0 +1,16 @@
+<!-- 小工具 -->
+<movable-area class="tool-warp {{prohibitSlide?'prohibit':''}}" catchtouchmove="prohibitSlide">
+	<movable-view id="tool-warp" class="tool-btn-warp" x="{{x}}" y="{{y}}" direction="all">
+		<view class="tools-list {{animateName}} {{toolsIsLeft?'left':''}}">
+			<block wx:for="{{miniProgramList}}" wx:key="index">
+				<view class="tools-item" bindtap="navigateToMiniProgram" data-id="{{item.addId}}" data-path="{{item.path}}">
+					<image src="{{item.icon}}"></image>
+					<view>{{item.name}}</view>
+				</view>
+			</block>
+		</view>
+		<view class="tool-btn" bindtap="showTools" bindtouchmove="toolsMove" bindtouchstart="toolsStart" bindtouchend="toolsEnd" bindchange="toolsChange">
+			<image src="../../images/tools.png"></image>
+		</view>
+	</movable-view>
+</movable-area>
