@@ -48,6 +48,8 @@ for (let i = 0; i < 24; i++) {
 for (let i = 0; i < 60; i++) {
   minutes.push(zero0(i));
 }
+
+let changeLock = false
 Component({
   /**
    * 组件的属性列表
@@ -329,6 +331,10 @@ Component({
       })
     },
     pickerChange(e) {
+      if (changeLock) {
+        return
+      }
+      changeLock = true
       let indexArr = e.detail.value
       let choose_index = this.data.currentColumnChange
       let {
@@ -365,7 +371,6 @@ Component({
         hour_index = hourList.map(Number).indexOf(num_choose_hour),
         min_index = minuteList.map(Number).indexOf(num_choose_min),
         sec_index = secondList.map(Number).indexOf(num_choose_sec)
-
       this._countList(choose_index, indexArr).then(res => {
         this._restTimeIndex({
           num_choose: {
@@ -383,7 +388,8 @@ Component({
             hour_index,
             min_index,
             sec_index
-          }
+          },
+          res
         })
       })
     },
@@ -460,10 +466,14 @@ Component({
     },
     // 根据当前选中时间 重置下标数组
     _restTimeIndex(timeArr) {
+      // let {
+      //   monthList,
+      //   dayList
+      // } = this.data
       let {
         monthList,
         dayList
-      } = this.data
+      } = timeArr.res
       let {
         num_choose_year,
         num_choose_month,
@@ -505,10 +515,15 @@ Component({
         }
       }
       this.setData({
-        // currentIndexArr: [year_index, month_index, day_index, hour_index, min_index, sec_index]
-        timeIndexArr: [year_index, month_index, day_index, hour_index, min_index, sec_index]
+        ...timeArr.res,
       }, () => {
-        this._indexConvertTime()
+        this.setData({
+          // currentIndexArr: [year_index, month_index, day_index, hour_index, min_index, sec_index]
+          timeIndexArr: [year_index, month_index, day_index, hour_index, min_index, sec_index],
+        }, () => {
+          changeLock = false
+          this._indexConvertTime()
+        })
       })
     },
     // 判断转动的是哪列
@@ -570,15 +585,19 @@ Component({
             } else {
               dayList = this._countDate(choose_year, choose_month)
             }
-            this.setData({
+            reslove({
               monthList,
               dayList
-            }, () => {
-              reslove({
-                monthList,
-                dayList
-              })
             })
+            // this.setData({
+            //   monthList,
+            //   dayList
+            // }, () => {
+            //   reslove({
+            //     monthList,
+            //     dayList
+            //   })
+            // })
             break;
           case 1:
             dayList = this._countDate(choose_year, choose_month)
@@ -597,19 +616,24 @@ Component({
                 dayList = end_dayList
               }
             }
-            this.setData({
+            reslove({
+              monthList,
               dayList
-            }, () => {
-              reslove({
-                dayList
-              })
             })
+            // this.setData({
+            //   dayList
+            // }, () => {
+            //   reslove({
+            //     dayList
+            //   })
+            // })
             break;
           case 2:
           case 3:
           case 4:
           case 5:
             reslove({
+              monthList,
               dayList
             })
             break;
